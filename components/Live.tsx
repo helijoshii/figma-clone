@@ -3,17 +3,16 @@ import LiveCursors from "./cursor/LiveCursors"
 import { useMyPresence, useOthers } from "@/liveblocks.config"
 
 const Live = () => {
-    
     const others = useOthers();
     const [{cursor }, updateMyPresence] = useMyPresence() as any;
 
     const handlePointerMove = useCallback((event: React.PointerEvent) => {
         event.preventDefault();  
+        
         const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
-        const y = event.clientX - event.currentTarget.getBoundingClientRect().y;
+        const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
 
         updateMyPresence({ cursor: { x, y } });
-
     }, [])
 
     const handlePointerLeave = useCallback((event: React.PointerEvent) => {
@@ -24,12 +23,10 @@ const Live = () => {
     }, [])
 
     const handlePointerDown = useCallback((event: React.PointerEvent) => {
-        event.preventDefault();  
         const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
-        const y = event.clientX - event.currentTarget.getBoundingClientRect().y;
+        const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
 
         updateMyPresence({ cursor: { x, y } });
-
     }, [])
 
   return (
